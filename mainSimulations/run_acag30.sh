@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=acag30
-#SBATCH --nodes=2
-#SBATCH --ntasks=40
+#SBATCH --nodes=4
+#SBATCH --ntasks=80
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=2G
-#SBATCH --time=48:00:00
+#SBATCH --time=04:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=aw1907@princeton.edu
 #SBATCH --output=acag30_%j.out

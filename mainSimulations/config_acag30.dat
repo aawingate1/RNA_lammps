@@ -1,4 +1,4 @@
-LAMMPS data file for RNA LLPS: (CAG)_40
+LAMMPS data file for RNA LLPS: (ACAG)_30
 
 7680 atoms
 7616 bonds
@@ -14,10 +14,10 @@ LAMMPS data file for RNA LLPS: (CAG)_40
 
 Masses
 
-1 329.20
-2 305.20
-3 345.20
-4 306.20
+1 329.20 # A
+2 305.20 # C
+3 345.20 # G
+4 306.20 # U
 
 Atoms
 

@@ -78,7 +78,7 @@ special_bonds lj 0.0 0.0 1.0 # for 1-2, 1-3, and 1-4
 velocity        all create ${temperature1} ${randomSeed}
 
 # neighbour list settings
-neighbor  15.0 bin
+neighbor  25.0 bin  # FIXED NOW
 
 # Timestep and computational parameters
 comm_style      tiled
@@ -98,7 +98,7 @@ thermo          1000
 thermo_style    custom step pe
 thermo_modify   flush yes
 
-restart      1000000 restart
+restart      1000000 restart_CAG40
 
 dump            1 all custom 10000 40CAG_200um_${temperature1}_${temperature9}.lammpstrj id mol type xu yu zu
 dump_modify     1 sort id

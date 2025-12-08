@@ -1,0 +1,69 @@
+###############################################
+# Continue ACAG30 from restart
+###############################################
+
+clear
+log log_acag30_continue1.lammps
+
+units  real
+dimension 3
+boundary p p p
+atom_style full
+
+# Use your latest restart file here
+read_restart restart_acag30.29000000
+
+reset_timestep 29000000
+restart 1000000 restart_acag30_cont1
+
+###########################
+# Recreate force field
+###########################
+
+bond_style harmonic
+bond_coeff 1 7.5 5.9
+
+angle_style harmonic
+angle_coeff 1 5.0 150.0
+
+pair_style hybrid/overlay lj/cut 10.0 base/rna 18.0
+pair_coeff * * lj/cut 2.0 8.9089871814
+pair_modify pair lj/cut shift yes
+
+pair_coeff 1 1 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #AA
+pair_coeff 1 2 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #AC
+pair_coeff 1 3 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #AG
+pair_coeff 1 4 base/rna 3.33333 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #AU
+pair_coeff 2 2 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #CC
+pair_coeff 2 3 base/rna 5.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #CG
+pair_coeff 2 4 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #CU
+pair_coeff 3 3 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #GG
+pair_coeff 3 4 base/rna 3.33333 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #GU
+pair_coeff 4 4 base/rna 0.00000 3.0 13.8 1.5 0.5 1.8326 0.9425 1.8326 1.1345 #UU
+
+special_bonds lj 0.0 0.0 1.0
+
+neighbor  25.0 bin
+comm_style      tiled
+timestep        10
+neigh_modify    every 10 delay 0
+
+###########################
+# Integrator, thermostat, output
+###########################
+
+variable temperature9 equal 293
+variable randomSeed equal 13652
+
+fix             fxnve   all nve
+fix             fxlange all langevin ${temperature9} ${temperature9} 100000.0 ${randomSeed}
+
+# Thermo output (same as main run)
+thermo          1000
+thermo_style    custom step pe
+thermo_modify   flush yes
+
+dump            1 all custom 10000 30ACAG_continue1.lammpstrj id mol type xu yu zu
+dump_modify     1 sort id
+
+run             100000000

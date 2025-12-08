@@ -1,6 +1,7 @@
 ###############################################
 # LAMMPS script for RNA simulations
 ###############################################
+log log_cag40.lammps
 units real
 dimension 3
 boundary p p p

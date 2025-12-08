@@ -15,4 +15,4 @@ module load openmpi/gcc/4.1.6
 
 cd $HOME/software/RNA_lammps/mainSimulations
 
-srun $HOME/.local/bin/lmp_rna -in lmp_main_acag30.in
+srun $HOME/.local/bin/lmp_rna -in lmp_continue1_acag30.in

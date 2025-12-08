@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=cug40
-#SBATCH --nodes=2
-#SBATCH --ntasks=34
+#SBATCH --nodes=4
+#SBATCH --ntasks=64
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=2G
-#SBATCH --time=48:00:00
+#SBATCH --time=24:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=aw1907@princeton.edu
 #SBATCH --output=cug40_%j.out
